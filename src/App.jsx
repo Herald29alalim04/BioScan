@@ -151,7 +151,7 @@ Bin: ${binInfo}\n`;
               Upload
             </button>
             <button className="btn realtime" onClick={() => setMode("realtime")}>
-              Realtime
+              Capture & Detect
             </button>
           </div>
         </div>
@@ -185,7 +185,7 @@ Bin: ${binInfo}\n`;
 
       {mode === "realtime" && (
         <div className="card">
-          <h2 className="title">Realtime Detection</h2>
+          <h2 className="title">Capture & Detect</h2>
 
           {/* ✅ Camera with facingMode support */}
           <Webcam
