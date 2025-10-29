@@ -132,7 +132,7 @@ body::before {
 
 .preview {
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
   margin: 20px auto;
   display: block;
   border-radius: 10px;
