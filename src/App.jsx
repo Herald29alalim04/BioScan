@@ -9,6 +9,8 @@ function App() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
   const [detections, setDetections] = useState([]);
+  const [facingMode, setFacingMode] = useState("environment"); // ✅ Added: default to back camera
+
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -132,6 +134,11 @@ Bin: ${binInfo}\n`;
     }
   };
 
+  // ✅ Added: toggle front/back camera
+  const toggleCamera = () => {
+    setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
+  };
+
   return (
     <div className="app-container">
       {mode === "menu" && (
@@ -179,20 +186,31 @@ Bin: ${binInfo}\n`;
       {mode === "realtime" && (
         <div className="card">
           <h2 className="title">Realtime Detection</h2>
+
+          {/* ✅ Camera with facingMode support */}
           <Webcam
             ref={webcamRef}
             audio={false}
             screenshotFormat="image/jpeg"
             className="webcam"
+            videoConstraints={{ facingMode }}
           />
+
           <div className="button-group">
-            <button className="btn upload" onClick={captureFromWebcam}>F
+            <button className="btn upload" onClick={captureFromWebcam}>
               Capture & Detect
             </button>
+
+            {/* ✅ Toggle front/back camera button */}
+            <button className="btn rotate" onClick={toggleCamera}>
+              {facingMode === "user" ? "Switch to Back Camera" : "Switch to Front Camera"}
+            </button>
+
             <button className="btn back" onClick={() => setMode("menu")}>
               Back
             </button>
           </div>
+
           {result && <pre className="result-box">{result}</pre>}
         </div>
       )}
