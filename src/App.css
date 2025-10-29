@@ -11,8 +11,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
 }
+
 body::before {
   content: "";
   position: fixed;
@@ -24,16 +24,16 @@ body::before {
   z-index: -1;
 }
 
+/* Main container */
 .app-container {
   display: flex;
   justify-content: center;
   align-items: center;
   animation: fadeIn 1s ease-in-out;
-  width: 100%;
   padding: 20px;
-  box-sizing: border-box;
 }
 
+/* Card styling */
 .card {
   background: rgba(255, 255, 255, 0.9);
   padding: 60px 80px;
@@ -46,9 +46,9 @@ body::before {
   flex-direction: column;
   align-items: center;
   backdrop-filter: blur(8px);
-  box-sizing: border-box;
 }
 
+/* Titles */
 .title {
   font-size: 3rem;
   color: #00796b;
@@ -60,16 +60,16 @@ body::before {
   color: #444;
   font-size: 1.1rem;
   margin-bottom: 40px;
-  text-align: center;
 }
 
+/* Buttons */
 .button-group {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
   margin-top: 20px;
-  flex-wrap: wrap; /* ✅ allows wrapping on small screens */
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -97,10 +97,7 @@ body::before {
   background: linear-gradient(135deg, #a5d6a7, #66bb6a);
 }
 
-.btn.rotate {
-  background: linear-gradient(135deg, #4fc3f7, #0288d1);
-}
-
+/* File upload button */
 .file-btn {
   position: relative;
   overflow: hidden;
@@ -116,34 +113,35 @@ body::before {
   cursor: pointer;
 }
 
-.btn:hover,
-.file-btn:hover {
+.btn:hover, .file-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Image with detection overlay */
+/* Image or camera with detection overlay */
 .image-container {
   position: relative;
   display: inline-block;
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
+  max-width: 90vw;
 }
 
-.preview {
+.preview, 
+#video {
   width: 100%;
-  max-width: 200px;
-  margin: 20px auto;
-  display: block;
+  height: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .overlay {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   pointer-events: none;
 }
@@ -160,33 +158,31 @@ body::before {
   max-height: 300px;
   overflow-y: auto;
   margin-top: 20px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
+/* Logo */
 .logo {
   width: 200px;
   height: auto;
   margin-bottom: 0px;
   animation: fadeIn 1s ease-in-out;
 }
+
 .logo:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
 
-/* ✅ MOBILE RESPONSIVENESS */
-@media (max-width: 768px) {
-  body {
-    align-items: flex-start;
-    height: auto;
-    background-attachment: scroll;
-  }
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+/* 📱 Mobile responsiveness */
+@media (max-width: 768px) {
   .card {
-    padding: 30px 20px;
-    margin: 40px 10px;
-    border-radius: 15px;
+    padding: 40px 30px;
   }
 
   .title {
@@ -195,21 +191,6 @@ body::before {
 
   .subtitle {
     font-size: 1rem;
-    margin-bottom: 20px;
-  }
-
-  .btn {
-    font-size: 0.9rem;
-    padding: 12px 25px;
-    min-width: 120px;
-  }
-
-  .preview {
-    max-width: 100%;
-  }
-
-  .logo {
-    width: 150px;
   }
 
   .button-group {
@@ -217,57 +198,21 @@ body::before {
     gap: 15px;
   }
 
-  .result-box {
-    font-size: 0.85rem;
-    max-height: 250px;
+  .image-container {
+    width: 300px;
   }
 }
 
-/* ✅ EXTRA SMALL SCREENS */
 @media (max-width: 480px) {
-  .title {
-    font-size: 1.6rem;
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-  }
-
   .card {
-    padding: 20px;
+    padding: 30px 20px;
   }
 
-  .btn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
+  .title {
+    font-size: 1.8rem;
   }
 
-  .logo {
-    width: 120px;
-  }
-}
-#video {
-  width: 320px;
-  max-width: 90vw;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  display: block;
-  margin: 20px auto;
-}
-
-@media (max-width: 600px) {
-  #video {
+  .image-container {
     width: 250px;
-  }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
